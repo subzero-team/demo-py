@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo-Py</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        img {
+            max-width: 50%;
+            height: auto;
+        }
+
+        p {
+            font-size: 30px;
+        }
+        p b {
+            color: {{ color }}; # 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="static/img/subzero-cartoon-logo.png" alt="Immagine" />
+        <p>hello Bro, my version is <b>{{ version }}</b><br/>
+            whe are in <b>{{ enviroment }}</b> enviroment! </p>
+    </div>
+</body>
+</html>

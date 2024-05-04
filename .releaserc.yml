@@ -1,0 +1,65 @@
+plugins:
+  - - "@semantic-release/commit-analyzer"
+    - preset: conventionalcommits
+  - - "@semantic-release/release-notes-generator"
+    - writerOpts:
+        commitsSort:
+        - subject
+        - scope
+      preset: conventionalcommits
+      presetConfig:
+        types:
+        - type: feat
+          section: Features
+        - type: fix
+          section: Bug Fixes
+        - type: chore
+          section: chore
+        - type: docs
+          section: Docs
+        - type: style
+          hidden: true
+        - type: refactor
+          section: Refactor
+        - type: perf
+          section: Perf
+        - type: test
+          section: Test
+        - type: build
+          section: build
+        - type: ci
+          section: CI
+  - "@semantic-release/changelog"
+  - - "@semantic-release/npm"
+    - "npmPublish": false
+  - "@semantic-release/github"
+  - ['@codedependant/semantic-release-docker', {
+      dockerProject: corollo,
+      dockerLogin: false,
+      dockerAutoClean: false
+  }]
+  - ['@semantic-release/exec', {
+      publishCmd: "echo 'latest_tag=${nextRelease.version}' > ./latest_tag.env && echo 'save latest_tag=${nextRelease.version} in file ./latest_tag.env'"
+  }]  
+  - - "@semantic-release/git"
+    - assets:
+      - package.json
+      - package-lock.json
+      - CHANGELOG.md
+      message: |-
+        ci(release): ${nextRelease.version} [skip ci]
+
+        ${nextRelease.notes}
+branches:
+  #child branches coming from tagged version for bugfix (1.1.x) or new features (1.x)
+  #maintenance branch
+  - name: "+([0-9])?(.{+([0-9]),x}).x"
+    channel: "latest"
+  #release a production version when merging towards main
+  - name: "main"
+    channel: "latest"
+  #prerelease branch
+  - name: "pre/beta"
+    channel: "next"
+    prerelease: "beta"
+debug: true
