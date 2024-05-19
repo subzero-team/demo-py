@@ -1,3 +1,20 @@
+[tool.poetry]
+name = "demo-py"
+version = "0.0.1"
+description = "A Python demo app to be realsed during Pycon Italy - Release it Like a Pro!"
+authors = [
+    "Simone Pulcini",
+    "Luigi Corollo"
+]
+readme = "README.md"
+homepage = "https://github.com/subzero-team"
+repository = "https://github.com/subzero-team/demo-py"
+keywords = ["release_it_like_a_pro", "demo"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^3.0.3"
+
 [build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
