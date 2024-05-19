@@ -30,8 +30,8 @@ plugins:
         - type: ci
           section: CI
   - "@semantic-release/changelog"
-  - - "@semantic-release/npm"
-    - "npmPublish": false
+  - - "semantic-release-pypi"
+    - "pypiPublish": false
   - "@semantic-release/github"
   - ['@codedependant/semantic-release-docker', {
       dockerProject: corollo,
@@ -43,8 +43,7 @@ plugins:
   }]  
   - - "@semantic-release/git"
     - assets:
-      - package.json
-      - package-lock.json
+      - pyproject.toml
       - CHANGELOG.md
       message: |-
         ci(release): ${nextRelease.version} [skip ci]
